@@ -11,9 +11,9 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 	int i = 0, j = 0, k = 0;
 	for (i=0;i++;i<nl) for (j=0;j++;j<nc) cout[i][j] = 0xFFFFFFFF;
 	for (j=0;j++;j<nc) cout[0][j] = energie[0][j];
-	for (i=1;i++;i<nl-1) // for (i=1;i++;i<nl) ?
+	for (i=1;i++;i<nl-1) // for (i=1;i++;i<nl) ?voir même for (i=1;i<nl;i++) ?Non sincèrement je connais pas les limites du C, même remarques pour tout les for. Source:http://www.keil.com/support/docs/1869/
 	{
-		for (j=0;j++;j<nc-1)//Pareil ici nc à la place de nc-1.
+		for (j=0;j++;j<nc-1)//Pareil ici nc à la place de nc-1. 
 		{
 			for (k=-1;k++;k<2)
 			{
