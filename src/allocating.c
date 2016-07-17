@@ -1,57 +1,55 @@
-#include <stdio.h>
+/*
+ * src/allocating.c
+ *
+ * This file contains functions to allocate the arrays where
+ * the pictures will reside.
+ *
+ * author: Hugues de Valon
+ * mail: hugues.devalon@gmail.com
+ * date: 16/07/2016
+ */
+
 #include <stdlib.h>
-#include "../headers/projet.h"
+#include <stdio.h>
+#include <stdint.h>
 
-unsigned char** alloue_image_char(int nl, int nc)
+#include "allocating.h"
+#include "error.h"
+
+/*
+ * Allocate a two-dimensional array filled with zeroes.
+ * You can precise in the arguments the size of each elements :
+ * 1, 2 or 4 bytes.
+ * The function returns the address of the array on success and
+ * NULL on error.
+ */
+void **alloc_image(int lines, int columns, size_t bytes_per_element)
 {
-	int i=0;
-	unsigned char** image_char = NULL;
-	image_char = calloc(nl, sizeof(*image_char));
-	if (image_char == NULL) 
-	{
-		printf("Erreur d'allocation");
+	void **image;
+
+	image = calloc(lines, sizeof(void *));
+	if (image == NULL) {
+		perror("Allocation error");
 		return NULL;
 	}
-	*image_char = calloc(nl*nc, sizeof(**image_char));
-	if (*image_char == NULL) 
+	*image = calloc(lines * columns, bytes_per_element);
+	if(*image == NULL)
 	{
-		printf("Erreur d'allocation");
-		free(image_char);
+		perror("Allocation error");
+		free(image);
 		return NULL;
 	}
-	for (i=1;i<nl;i++) image_char[i]=image_char[i-1]+nc;
-	return image_char;
+	for (int i = 1; i < lines; i++)
+		image[i] = image[i - 1] + columns;
+
+	return image;
 }
 
-unsigned int** alloue_image_int(int nl, int nc)
+/*
+ * Free the array containing the image.
+ */
+void free_image(void **image)
 {
-	int i=0;
-	unsigned int** image_int = NULL;
-	image_int = calloc(nl, sizeof(*image_int));
-	if (image_int == NULL) 
-	{
-		printf("Erreur d'allocation");
-		return NULL;
-	}
-	*image_int = calloc(nl*nc, sizeof(**image_int));
-	if (*image_int == NULL) 
-	{
-		printf("Erreur d'allocation");	
-		free(image_int);
-		return NULL;
-	}
-	for (i=1;i<nl;i++) image_int[i]=image_int[i-1]+nc;
-	return image_int;
-}
-
-void libere_image_char(unsigned char** im)
-{
-	free(*im);
-	free(im);
-}
-
-void libere_image_int(unsigned int** im)
-{
-	free(*im);
-	free(im);
+	free(*image);
+	free(image);
 }

@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
+
+#include "project.h"
+#include "allocating.h"
 
 void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout_final, int nl, int nc)
 {
 	
-	if (pere == NULL) pere=alloue_image_int(nl, nc);
+	if (pere == NULL) pere=(unsigned int **)alloc_image(nl, nc, INT);
 	
-	unsigned int** cout = alloue_image_int(nl,nc);
+	unsigned int** cout = (unsigned int **)alloc_image(nl,nc, INT);
 	if (cout_final == NULL) printf("Erreur d'allocation.\n");
 	int i = 0, j = 0, k = 0;
 	
@@ -33,6 +35,6 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 	for (j=0;j<nc;j++) cout_final[j] = cout[nl-1][j];  
 	//printf("Tableau cout :\n");
 	//afficheTabInt(cout,nl,nc);	
-	libere_image_int(cout);
+	free_image((void **)cout);
 	
 }

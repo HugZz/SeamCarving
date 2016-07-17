@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
 
 int trouve_chemin(unsigned int* ch_max, unsigned int** pere, unsigned int* coutfinal, int nl, int nc)
 {

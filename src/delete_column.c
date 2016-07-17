@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
 
 void supprime_colonne(unsigned char** im, unsigned int* ch_max,int nl, int* pnc) 
 {

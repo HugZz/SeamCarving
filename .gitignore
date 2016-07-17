@@ -7,3 +7,7 @@
 
 # Documents
 *.pdf
+
+# Resulting binary
+seamcarving
+unit_tests

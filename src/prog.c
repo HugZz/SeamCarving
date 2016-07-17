@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
+
+#include "project.h"
+#include "allocating.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +18,7 @@ int main(int argc, char *argv[])
 
 	if (test == 1) //Tableau de test pré-rentré
 	{
-		im = alloue_image_char(6,7);
+		im = (unsigned char **)alloc_image(6,7, CHAR);
 		nl = 6;
 		nc = 7;
 	
@@ -78,9 +80,9 @@ int main(int argc, char *argv[])
 		printf("Image zoomée linéairement :\n");
 		afficheTab(imz,nl,nc-nbcol);
 	
-		libere_image_char(im);
-		libere_image_char(ims);
-		libere_image_char(imz);
+		free_image((void **)im);
+		free_image((void **)ims);
+		free_image((void **)imz);
 
 	}
 
@@ -156,8 +158,8 @@ int main(int argc, char *argv[])
 		//SDL_FreeSurface(zx);
 		SDL_Quit();
 
-		libere_image_char(im);
-		libere_image_char(ims);
+		free_image((void **)im);
+		free_image((void **)ims);
 		//libere_image_char(imz);
 	}
 
@@ -168,7 +170,7 @@ int main(int argc, char *argv[])
 		nl = lire();
 		printf("Nombre de colonne :");
 		nc=lire();
-		im = alloue_image_char(nl,nc);
+		im = (unsigned char **)alloc_image(nl,nc, CHAR);
 		printf("Entrez les éléments :\n");
 		for (i=0;i<nl;i++) 
 		{
@@ -193,9 +195,9 @@ int main(int argc, char *argv[])
 		printf("Image zoomée linéairement :\n");
 		afficheTab(imz,nl,nc-nbcol);
 	
-		libere_image_char(im);
-		libere_image_char(ims);
-		libere_image_char(imz);
+		free_image((void **)im);
+		free_image((void **)ims);
+		free_image((void **)imz);
 
 	}	
 	

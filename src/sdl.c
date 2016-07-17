@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
+#include "project.h"
+#include "allocating.h"
 
 /*
  * Return the pixel value at (x, y)
@@ -79,7 +80,7 @@ unsigned char **lire_image(char* image,int* nl, int* nc)
 	*nl=img->h;
 	*nc=img->w;
 	unsigned char **im = NULL;
-	im = alloue_image_char(*nl,*nc);
+	im = (unsigned char **)alloc_image(*nl,*nc, CHAR);
 	for (i=0;i<*nl;i++)
 	{
 		for (j=0;j<*nc;j++)

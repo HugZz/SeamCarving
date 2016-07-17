@@ -1,8 +1,25 @@
-main : allocation.o calcul_cout.o energie.o zoomx.o seam_carving.o prog.o supprime_colonne.o trouve_chemin.o lire.o affiche_tableau.o SDL.o
-	gcc objets/allocation.o objets/calcul_cout.o objets/energie.o objets/prog.o objets/seam_carving.o objets/supprime_colonne.o objets/trouve_chemin.o objets/zoomx.o objets/lire.o objets/affiche_tableau.o objets/SDL.o -lSDL -lSDLmain -o prog.exe
-%.o : sources/%.c
-	gcc $< -c -o objets/$@
-clean :
-	rm objets/*.o
-cleanexe :
-	rm *.exe
+CC = gcc
+CFLAGS = -Wall
+LDFLAGS = -lSDL
+LDFLAGS_TST = -lcmocka -lSDL
+EXEC = seamcarving
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:.c=.o)
+SRC_TST = $(wildcard test/*.c)
+OBJ_TST = $(SRC_TST:.c=.o)
+
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+test: $(OBJ_TST)
+	$(CC) -o unit_tests $^ $(LDFLAGS_TST)
+	./unit_tests
+
+%.o: %.c
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+clean:
+	rm $(OBJ)
+	rm $(OBJ_TST)

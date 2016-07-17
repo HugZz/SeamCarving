@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projet.h"
+#include "project.h"
+#include "allocating.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
 	unsigned char** ims = NULL;
-	ims = alloue_image_char(nl,nc);
+	ims = (unsigned char **)alloc_image(nl,nc, CHAR);
 
 	int i=0;
 	int j=0;
@@ -21,7 +22,7 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		//afficheTab(energie,nl,ncb);
 			
 		unsigned int** pere = NULL; //indication pour chaque case du numéro de colonne par laquelle on est arrivé
-		pere=alloue_image_int(nl,ncb); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
+		pere=(unsigned int **)alloc_image(nl,ncb, INT); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
 		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
 		cout_final = calloc(nc, sizeof(unsigned int)); //idem
 		calcul_cout(energie,pere,cout_final,nl,ncb);
@@ -33,6 +34,7 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne
 		ch_max = calloc(nl, sizeof(unsigned int));
 		int k=0; //numéro de colonne de la dernière case du chemin
+		k++;
 		k = trouve_chemin(ch_max,pere,cout_final,nl,ncb);
 		//printf("k = %d\n", k);
 		//printf("Tableau du chemin :\n");
