@@ -6,7 +6,9 @@ EXEC = seamcarving
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 SRC_TST = $(wildcard test/*.c)
-OBJ_TST = $(SRC_TST:.c=.o)
+OBJ_TST = $(OBJ)
+OBJ_TST += $(SRC_TST:.c=.o)
+OBJ_TST := $(filter-out src/prog.o, $(OBJ_TST))
 
 all: $(EXEC)
 
