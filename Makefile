@@ -23,5 +23,5 @@ test: $(OBJ_TST)
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm $(OBJ)
 	rm $(OBJ_TST)
+	rm src/prog.o
