@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 LDFLAGS = -lSDL
 LDFLAGS_TST = -lcmocka -lSDL
 EXEC = seamcarving
@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 SRC_TST = $(wildcard test/*.c)
 OBJ_TST = $(OBJ)
 OBJ_TST += $(SRC_TST:.c=.o)
-OBJ_TST := $(filter-out src/prog.o, $(OBJ_TST))
+OBJ_TST := $(filter-out src/main.o, $(OBJ_TST))
 
 all: $(EXEC)
 
@@ -24,4 +24,4 @@ test: $(OBJ_TST)
 
 clean:
 	rm $(OBJ_TST)
-	rm src/prog.o
+	rm src/main.o

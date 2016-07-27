@@ -12,3 +12,6 @@
 # Resulting binary
 seamcarving
 unit_tests
+
+# gdb init
+.gdbinit

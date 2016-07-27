@@ -12,16 +12,15 @@ int main(int argc, char *argv[])
 	unsigned char** ims = NULL;
 	unsigned char** imz = NULL;
 	int test = 2;
-    printf("Que voulez-vous faire ?\n\t0 - Image avec SDL.\n\t1 - Tableau de test pré-rentré.\n\t2 - Entrée de l'image manuellement.\n\n");
-    printf("Choix : ");
-	test = lire();	
+	printf("Que voulez-vous faire ?\n\t0 - Image avec SDL.\n\t1 - Tableau de test pré-rentré.\n\t2 - Entrée de l'image manuellement.\n\n");
+	printf("Choix : ");
+	test = lire();
 
-	if (test == 1) //Tableau de test pré-rentré
-	{
-		im = (unsigned char **)alloc_image(6,7, CHAR);
+	if (test == 1) {
+		im = (unsigned char **) alloc_image(6,7, CHAR);
 		nl = 6;
 		nc = 7;
-	
+
 		im[0][0]=195;
 		im[0][1]=196;
 		im[0][2]=196;
@@ -64,7 +63,7 @@ int main(int argc, char *argv[])
 		im[5][4]=176;
 		im[5][5]=180;
 		im[5][6]=180;
-		
+
 
 		printf("Image de départ : \n");
 		afficheTab(im, nl, nc);
@@ -74,12 +73,12 @@ int main(int argc, char *argv[])
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
 		afficheTab(ims,nl,nc-nbcol);
-	
-	
+
+
 		imz = zoomx(im,nbcol,nl,nc);
 		printf("Image zoomée linéairement :\n");
 		afficheTab(imz,nl,nc-nbcol);
-	
+
 		free_image((void **)im);
 		free_image((void **)ims);
 		free_image((void **)imz);
@@ -93,18 +92,18 @@ int main(int argc, char *argv[])
 		SDL_Surface *sm=NULL;
 		//SDL_Surface *zx=NULL;
 
-		im = lire_image("pictures/mongol.bmp", &nl, &nc);
+		im = lire_image("pics/mongol.bmp", &nl, &nc);
 		int NC = nc;
 
 		SDL_Rect positionS;
 		positionS.x=0;
 		positionS.y=0;
-        /*
-		SDL_Rect positionZ;
-		positionZ.x=0;
-		positionZ.y=nl;
-        */	
-        
+		/*
+		   SDL_Rect positionZ;
+		   positionZ.x=0;
+		   positionZ.y=nl;
+		   */
+
 		screen = SDL_SetVideoMode(nc,nl,32,SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
 		SDL_WM_SetCaption("SeamCarving",NULL); 
 
@@ -115,7 +114,7 @@ int main(int argc, char *argv[])
 		dessiner(im,screen,sm, positionS, nl, nc);
 		//dessiner(im,screen,zx, positionZ, nl, nc);
 
-			
+
 		int continuer =1;
 		SDL_Event event;
 		while (continuer)
@@ -147,13 +146,13 @@ int main(int argc, char *argv[])
 					//dessiner(imz,screen,zx, positionZ, nl, nc);
 					break;
 			}
-			
+
 			SDL_Flip(screen);
 		}	
 
 
 
-		
+
 		SDL_FreeSurface(sm);
 		//SDL_FreeSurface(zx);
 		SDL_Quit();
@@ -189,18 +188,18 @@ int main(int argc, char *argv[])
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
 		afficheTab(ims,nl,nc-nbcol);
-	
-	
+
+
 		imz = zoomx(im,nbcol,nl,nc);
 		printf("Image zoomée linéairement :\n");
 		afficheTab(imz,nl,nc-nbcol);
-	
+
 		free_image((void **)im);
 		free_image((void **)ims);
 		free_image((void **)imz);
 
 	}	
-	
-	
+
+
 	return EXIT_SUCCESS;	
 }
