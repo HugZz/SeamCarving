@@ -40,7 +40,10 @@ void **alloc_image(int lines, int columns, size_t bytes_per_element)
 		return NULL;
 	}
 	for (int i = 1; i < lines; i++)
-		image[i] = image[i - 1] + columns;
+		/*
+		 * Warning: pointer arithmetics with void pointers
+		 */
+		image[i] = image[i - 1] + columns * bytes_per_element;
 
 	return image;
 }
