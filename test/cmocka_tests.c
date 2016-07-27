@@ -10,7 +10,8 @@ int main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(null_test_success),
-        cmocka_unit_test(test_allocating),
+        cmocka_unit_test(test_allocating_basic),
+        cmocka_unit_test(test_allocating_mem_corrupt)
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
