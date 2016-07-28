@@ -3,6 +3,7 @@
 
 #include "project.h"
 #include "allocating.h"
+#include "pretty_print.h"
 
 int main(int argc, char *argv[])
 {
@@ -66,18 +67,18 @@ int main(int argc, char *argv[])
 
 
 		printf("Image de départ : \n");
-		afficheTab(im, nl, nc);
+		pretty_print((void **) im, nl, nc, CHAR);
 		printf("Réduire l'image de combien de colonnes ? ");
 		nbcol=lire();
 
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
-		afficheTab(ims,nl,nc-nbcol);
+		pretty_print((void **) ims,nl,nc-nbcol, CHAR);
 
 
 		imz = zoomx(im,nbcol,nl,nc);
 		printf("Image zoomée linéairement :\n");
-		afficheTab(imz,nl,nc-nbcol);
+		pretty_print((void **) imz,nl,nc-nbcol, CHAR);
 
 		free_image((void **)im);
 		free_image((void **)ims);
@@ -181,18 +182,18 @@ int main(int argc, char *argv[])
 		}
 
 		printf("Image de départ : \n");
-		afficheTab(im, nl, nc);
+		pretty_print((void **) im, nl, nc, CHAR);
 		printf("Réduire l'image de combien de colonnes ? ");
 		nbcol=lire();
 
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
-		afficheTab(ims,nl,nc-nbcol);
+		pretty_print((void **) ims,nl,nc-nbcol, CHAR);
 
 
 		imz = zoomx(im,nbcol,nl,nc);
 		printf("Image zoomée linéairement :\n");
-		afficheTab(imz,nl,nc-nbcol);
+		pretty_print((void **) imz,nl,nc-nbcol, CHAR);
 
 		free_image((void **)im);
 		free_image((void **)ims);

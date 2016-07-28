@@ -23,7 +23,7 @@
  * The function returns the address of the array on success and
  * NULL on error.
  */
-void **alloc_image(int lines, int columns, size_t bytes_per_element)
+void **alloc_image(uint32_t lines, uint32_t columns, size_t bytes_per_element)
 {
 	void **image;
 
@@ -39,7 +39,7 @@ void **alloc_image(int lines, int columns, size_t bytes_per_element)
 		free(image);
 		return NULL;
 	}
-	for (int i = 1; i < lines; i++)
+	for (uint32_t i = 1; i < lines; i++)
 		/*
 		 * Warning: pointer arithmetics with void pointers
 		 */
