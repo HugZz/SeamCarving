@@ -1,28 +1,50 @@
+/*
+ * src/read.c
+ *
+ * Read data from STDIN in a safe way.
+ *
+ * author: Hugues de Valon
+ * mail: hugues.devalon@gmail.com
+ * date: 28/07/2016
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 
-int lire()
+/*
+ * Read a 32 bits positive integer from standard input.
+ * Returns the integer on success or -1 if failure.
+ */
+uint32_t read_uint32(void)
 {
-	char chaine[100] = {0};
-	char* position = NULL;
-	if (fgets(chaine, 100, stdin) != NULL)
-	{
-		position = strchr(chaine, '\n');
-		if (position != NULL) *position = '\0';
-		else
-		{
-			int c=0;
+	/*
+	 * 10 digits max to be entered + the '\n' + '\0'
+	 */
+	char string[12] = {0};
+	char *position = NULL;
+
+	if (fgets(string, 11, stdin) != NULL) {
+		position = strchr(string, '\n');
+		if (position != NULL) {
+			*position = '\0';
+		} else {
+			/*
+			 * Dump the buffer.
+			 */
+			int c = 0;
 			while (c != '\n' && c != EOF) c = getchar();
 		}
-		return (int) strtol(chaine, NULL, 10);
+		return (uint32_t) strtol(string, NULL, 10);
 	}
-	else 
+	else
 	{
-		int c=0;
+		/*
+		* Dump the buffer.
+		*/
+		int c = 0;
 		while (c != 'n' && c != EOF) c = getchar();
 		return -1;
 	}
-
-
 }

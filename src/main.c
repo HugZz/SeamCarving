@@ -4,6 +4,7 @@
 #include "project.h"
 #include "allocating.h"
 #include "pretty_print.h"
+#include "read.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
 	int test = 2;
 	printf("Que voulez-vous faire ?\n\t0 - Image avec SDL.\n\t1 - Tableau de test pré-rentré.\n\t2 - Entrée de l'image manuellement.\n\n");
 	printf("Choix : ");
-	test = lire();
+	test = read_uint32();
 
 	if (test == 1) {
 		im = (unsigned char **) alloc_image(6,7, CHAR);
@@ -69,7 +70,7 @@ int main(int argc, char *argv[])
 		printf("Image de départ : \n");
 		pretty_print((void **) im, nl, nc, CHAR);
 		printf("Réduire l'image de combien de colonnes ? ");
-		nbcol=lire();
+		nbcol=read_uint32();
 
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
@@ -167,9 +168,9 @@ int main(int argc, char *argv[])
 	{
 		printf("\n\n\nEntrez manuellement le tableau représentant l'image de base.\n");
 		printf("Nombre de ligne : ");
-		nl = lire();
+		nl = read_uint32();
 		printf("Nombre de colonne :");
-		nc=lire();
+		nc=read_uint32();
 		im = (unsigned char **)alloc_image(nl,nc, CHAR);
 		printf("Entrez les éléments :\n");
 		for (i=0;i<nl;i++) 
@@ -177,14 +178,14 @@ int main(int argc, char *argv[])
 			for (j=0;j<nc;j++)
 			{
 				printf("(%d;%d) : ", i, j);
-				im[i][j] = (char) lire();
+				im[i][j] = (char) read_uint32();
 			}
 		}
 
 		printf("Image de départ : \n");
 		pretty_print((void **) im, nl, nc, CHAR);
 		printf("Réduire l'image de combien de colonnes ? ");
-		nbcol=lire();
+		nbcol=read_uint32();
 
 		ims = seam_carving(im,nbcol,nl,nc);
 		printf("\nImage réduite par SeamCarving :\n");
