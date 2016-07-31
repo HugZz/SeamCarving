@@ -1,50 +1,80 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * src/seam_carving.c
+ *
+ * Main file for seam carving function.
+ *
+ * author: Hugues de Valon
+ * mail: hugues.devalon@gmail.com
+ * date: 31/07/2016
+ */
 
-#include "project.h"
+#include <stdlib.h>
+#include <stdint.h>
+
 #include "energy.h"
 #include "allocating.h"
 #include "cost.h"
 #include "find_path.h"
 #include "delete_column.h"
+#include "error.h"
 
-unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
+/*
+ * This function returns image with columns_to_delete columns deleted.
+ * Far right deleted pixels are remplaced with zeroes.
+ * Returns NULL on error.
+ */
+uint8_t **seam_carving(uint8_t **image, uint32_t columns_to_delete,
+		uint32_t nl, uint32_t nc)
 {
-	unsigned char** ims = NULL;
-	ims = (unsigned char **)alloc_image(nl,nc, CHAR);
+	uint8_t **new_image, **energy;
+	uint32_t **father_column;
+	uint32_t *final_cost, *best_path;
+	uint32_t i, j, k;
 
-	int i=0;
-	int j=0;
-	int ncb = nc;
-	for (i=0;i<nl;i++) for (j=0;j<nc;j++) ims[i][j]=im[i][j];
-
-	for (j=0;j<nbcol;j++)
-	{
-
-		unsigned char** energie = NULL; //energie de l'image
-		energie = gradienty(ims,nl,ncb);
-		//printf("\nEnergie de l'image :\n");
-		//afficheTab(energie,nl,ncb);
-
-		unsigned int** pere = NULL; //indication pour chaque case du numéro de colonne par laquelle on est arrivé
-		pere=(unsigned int **)alloc_image(nl,ncb, INT); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
-		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
-		cout_final = calloc(nc, sizeof(unsigned int)); //idem
-		cost(pere,cout_final, energie, nl,ncb);
-		//printf("Tableau père :\n");
-		//printf("Tableau cout_final : \n");
-		//affiche1D(cout_final,ncb);
-
-		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne
-		ch_max = calloc(nl, sizeof(unsigned int));
-		int k=0; //numéro de colonne de la dernière case du chemin
-		k++;
-		k = optimal_path(ch_max,pere,cout_final,nl,ncb);
-		//printf("k = %d\n", k);
-		//printf("Tableau du chemin :\n");
-		//affiche1D(ch_max,nl);
-		delete_column(ims,ch_max,nl,ncb);
-		ncb--;
+	if ((new_image = (uint8_t **) alloc_image(nl, nc, CHAR)) == NULL) {
+		ERROR("allocation new_image failed.\n");
+		return NULL;
 	}
-	return ims;
+	for (i = 0; i < nl; i++)
+		for (j = 0; j < nc; j++)
+			new_image[i][j] = image[i][j];
+	for (k = 0; k < columns_to_delete; k++)
+	{
+		energy = gradienty(new_image, nl, nc);
+		if (energy == NULL) {
+			ERROR("calculating energy failed.\n");
+			return NULL;
+		}
+		father_column = (uint32_t **) alloc_image(nl, nc, INT);
+		if (father_column == NULL) {
+			ERROR("calculating energy failed.\n");
+			return NULL;
+		}
+		final_cost = calloc(nc, sizeof(uint32_t));
+		if (final_cost == NULL) {
+			perror("Allocation of final_cost failed.");
+			return NULL;
+		}
+		if (cost(father_column, final_cost, energy, nl, nc) < 0) {
+			ERROR("failed calculating cost.\n");
+			return NULL;
+		}
+		best_path = calloc(nl, sizeof(unsigned int));
+		if (best_path == NULL) {
+			perror("Allocation of best_path failed.");
+			return NULL;
+		}
+		if (optimal_path(best_path, father_column, final_cost, nl, nc)
+				< 0) {
+			ERROR("failed finding the optimal path.\n");
+			return NULL;
+		}
+		if (delete_column(new_image, best_path, nl,nc) < 0) {
+			ERROR("failed deleting columns.\n");
+			return NULL;
+		}
+		nc--;
+	}
+
+	return new_image;
 }
