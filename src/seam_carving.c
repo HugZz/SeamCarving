@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "project.h"
+#include "energy.h"
 #include "allocating.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
@@ -10,17 +12,17 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 
 	int i=0;
 	int j=0;
-	int ncb = nc;	
+	int ncb = nc;
 	for (i=0;i<nl;i++) for (j=0;j<nc;j++) ims[i][j]=im[i][j];
-	
+
 	for (j=0;j<nbcol;j++)
 	{
-		
+
 		unsigned char** energie = NULL; //energie de l'image
-		energie = gradienty(energie,ims,nl,ncb);
+		energie = gradienty(ims,nl,ncb);
 		//printf("\nEnergie de l'image :\n");
 		//afficheTab(energie,nl,ncb);
-			
+
 		unsigned int** pere = NULL; //indication pour chaque case du numéro de colonne par laquelle on est arrivé
 		pere=(unsigned int **)alloc_image(nl,ncb, INT); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
 		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
@@ -40,7 +42,7 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		//printf("Tableau du chemin :\n");
 		//affiche1D(ch_max,nl);
 		supprime_colonne(ims,ch_max,nl,&ncb);
-		
+
 	}
 	return ims;
 }
