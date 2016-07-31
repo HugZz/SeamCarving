@@ -23,5 +23,4 @@ test: $(OBJ_TST)
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm src/main.o
-	rm $(OBJ_TST)
+	rm src/*.o
