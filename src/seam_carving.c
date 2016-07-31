@@ -4,6 +4,7 @@
 #include "project.h"
 #include "energy.h"
 #include "allocating.h"
+#include "cost.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
@@ -27,9 +28,8 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		pere=(unsigned int **)alloc_image(nl,ncb, INT); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
 		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
 		cout_final = calloc(nc, sizeof(unsigned int)); //idem
-		calcul_cout(energie,pere,cout_final,nl,ncb);
+		cost(pere,cout_final, energie, nl,ncb);
 		//printf("Tableau père :\n");
-		//afficheTabInt(pere,nl,ncb);
 		//printf("Tableau cout_final : \n");
 		//affiche1D(cout_final,ncb);
 
