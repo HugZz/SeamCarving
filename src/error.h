@@ -12,11 +12,12 @@
 #define __ERROR__
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define ERROR(...)							\
 	do {								\
-		printf("ERROR: %s:%s\t", __FILE__, __LINE__);		\
-		printf(__VA_ARGS__);					\
+		fprintf(stderr, "ERROR: %s:%d\t\t", __FILE__, __LINE__);\
+		fprintf(stderr, __VA_ARGS__);				\
 	} while (0)
 
 #endif /* __ERROR__ */
