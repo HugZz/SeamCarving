@@ -1,7 +1,7 @@
 /*
  * src/cost.c
  *
- * Calcule the cost of each possible path (from top to bottom) of the image.
+ * Calculate the cost of each possible path (from top to bottom) of the image.
  *
  * author: Hugues de Valon
  * mail: hugues.devalon@gmail.com

@@ -8,6 +8,9 @@
  * date: 31/07/2016
  */
 
+#ifndef __COST__
+#define __COST__
+
 /*
  * Fills final_cost with the total cost of the nc lowest expensive paths of
  * the image.
@@ -17,3 +20,5 @@
  */
 int32_t cost(uint32_t **father_column, uint32_t *final_cost,
 		uint8_t **energy, uint32_t nl, uint32_t nc);
+
+#endif /* __COST__ */

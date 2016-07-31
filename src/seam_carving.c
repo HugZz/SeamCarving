@@ -5,6 +5,7 @@
 #include "energy.h"
 #include "allocating.h"
 #include "cost.h"
+#include "find_path.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
@@ -37,7 +38,7 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		ch_max = calloc(nl, sizeof(unsigned int));
 		int k=0; //numéro de colonne de la dernière case du chemin
 		k++;
-		k = trouve_chemin(ch_max,pere,cout_final,nl,ncb);
+		k = optimal_path(ch_max,pere,cout_final,nl,ncb);
 		//printf("k = %d\n", k);
 		//printf("Tableau du chemin :\n");
 		//affiche1D(ch_max,nl);
