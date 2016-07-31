@@ -77,13 +77,8 @@ int main(int argc, char *argv[])
 		pretty_print((void **) ims,nl,nc-nbcol, CHAR);
 
 
-		imz = zoomx(im,nbcol,nl,nc);
-		printf("Image zoomée linéairement :\n");
-		pretty_print((void **) imz,nl,nc-nbcol, CHAR);
-
 		free_image((void **)im);
 		free_image((void **)ims);
-		free_image((void **)imz);
 
 	}
 
@@ -143,7 +138,6 @@ int main(int argc, char *argv[])
 				case SDL_VIDEORESIZE:
 					nc = event.resize.w;
 					ims = seam_carving(im,NC-nc,nl,NC);
-					//imz = zoomx(im,NC-nc,nl,NC);
 					dessiner(ims,screen,sm, positionS, nl, nc);
 					//dessiner(imz,screen,zx, positionZ, nl, nc);
 					break;
@@ -192,13 +186,11 @@ int main(int argc, char *argv[])
 		pretty_print((void **) ims,nl,nc-nbcol, CHAR);
 
 
-		imz = zoomx(im,nbcol,nl,nc);
 		printf("Image zoomée linéairement :\n");
 		pretty_print((void **) imz,nl,nc-nbcol, CHAR);
 
 		free_image((void **)im);
 		free_image((void **)ims);
-		free_image((void **)imz);
 
 	}	
 

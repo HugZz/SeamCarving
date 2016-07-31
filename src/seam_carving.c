@@ -6,6 +6,7 @@
 #include "allocating.h"
 #include "cost.h"
 #include "find_path.h"
+#include "delete_column.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
@@ -42,8 +43,8 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		//printf("k = %d\n", k);
 		//printf("Tableau du chemin :\n");
 		//affiche1D(ch_max,nl);
-		supprime_colonne(ims,ch_max,nl,&ncb);
-
+		delete_column(ims,ch_max,nl,ncb);
+		ncb--;
 	}
 	return ims;
 }
