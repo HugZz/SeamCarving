@@ -26,6 +26,8 @@ To make sure all tests pass
 ## Contributing
 Feel free to participate! I will be happy to review any pull requests.
 Just make sure to test what you do, and to check that old tests still pass.
+The coding style of this project is the [linux kernel coding style](https://www.kernel.org/doc/Documentation/CodingStyle). If you want to help, a good startpoint is
+to check the [issues](https://github.com/HugZz/seamcarving/issues)!
 
 ## Contributors
 * Hugues de Valon - hugues.devalon@gmail.com
