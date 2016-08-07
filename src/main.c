@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	uint8_t **result_image;
 
 	if (argc != 4) {
-		printf("usage: ./seamcarving IMAGE_NAME NEW_WIDTH DESTINATION\n");
+		printf("usage: ./seamcarving IMAGE_FILE NEW_WIDTH DESTINATION_FILE\n");
 		return EXIT_FAILURE;
 	}
 	new_width = (uint32_t) atol(argv[2]);

@@ -3,17 +3,20 @@
 The purpose of *seam carving* is to give a way to reduce an image's size.
 To do so, the algorithm only deletes the useless pixels, the ones that do not change
 the general informations of the image.
-This special implementation of seam carving uses SDL to be able to watch the results
-of the algorithm.
+This special implementation handles only BMP images (so far...) using the QDBMP library.
 
 ## Installation and usage
-To be able to compile the program, you need to install the *SDL* library (1.2 version).
+To install and compile the program, you will need a C compiler and GNU `make`.
 If you want to launch the tests, you also need *cmocka* unit tests library.
 
-Then with make, it's all super easy
+Download the code using `git`: `git clone https://github.com/HugZz/seamcarving`  
+Or just download the ZIP directly from GitHub and extract it.
 
+Then with `make`, it's all super easy
+
+* `cd seamcarving`
 * `make` to compile the main program
-* `./seamcarving` to execute
+* `./seamcarving ORIGINAL_FILE NEW_WIDTH DESTINATION_FILE` to execute
 
 To make sure all tests pass
 
