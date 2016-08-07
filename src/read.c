@@ -17,7 +17,7 @@
  * Read a 32 bits positive integer from standard input.
  * Returns the integer on success or -1 if failure.
  */
-uint32_t read_uint32(void)
+int32_t read_uint32(void)
 {
 	/*
 	 * 10 digits max to be entered + the '\n' + '\0'

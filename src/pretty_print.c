@@ -18,7 +18,7 @@
  * Print an array in a good way depending of its type.
  * Returns 0 on succes, -1 if tab is NULL, -2 if wrong size.
  */
-uint32_t pretty_print(void **tab, uint32_t lines, uint32_t columns, size_t type)
+int32_t pretty_print(void **tab, uint32_t lines, uint32_t columns, size_t type)
 {
 	uint32_t i, j;
 
