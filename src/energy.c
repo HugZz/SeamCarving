@@ -17,6 +17,7 @@
 
 /*
  * Returns the calculated horizontal gradient of the image.
+ * The energy array is allocated and need to be freeed.
  * Returns NULL on error.
  */
 uint8_t **gradienty(uint8_t **img, uint32_t nl, uint32_t nc)
@@ -55,5 +56,6 @@ uint8_t **gradienty(uint8_t **img, uint32_t nl, uint32_t nc)
 				- img[(i + 1) % nl][(j + 1) % nc];
 			energy[i][j] = abs(p_diag + n_diag + hor) / 3.0;
 		}
+
 	return energy;
 }

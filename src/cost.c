@@ -10,7 +10,6 @@
 
 #include <stdlib.h>
 
-#include "project.h"
 #include "allocating.h"
 #include "error.h"
 

@@ -13,6 +13,7 @@
 
 /*
  * This function returns image with columns_to_delete columns deleted.
+ * The returned array is allocated and need to be freeed by user.
  * Far right deleted pixels are remplaced with zeroes.
  * Returns NULL on error.
  */

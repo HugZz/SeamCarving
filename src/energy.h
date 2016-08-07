@@ -15,6 +15,7 @@
 
 /*
  * Returns the calculated horizontal gradient of the image.
+ * The energy array is allocaed and need to be freeed.
  * Returns NULL on error.
  */
 uint8_t **gradienty(uint8_t **image, uint32_t lines, uint32_t columns);
